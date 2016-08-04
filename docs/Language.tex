@@ -1,0 +1,77 @@
+\documentclass[letterpaper, 12pt]{article}
+\begin{document}
+\author{Eric Neblock}
+\title{Trivial Language for Z80}
+\date{Last updated: \today}
+\maketitle
+\section{Introduction}
+This document will give a brief overview of how the \textit{\underline{Trivial
+  Language for Z80}} works and how to actually program in it.
+program in it. 
+\section{Reserve Words and Keywords}
+There are several reserve words within the language. They are as follows:
+\subsection{Reserve Words}
+The folling list is to demostrate which words can not be used in the language
+other than their intended purpose.
+\begin{enumerate}
+\item main()
+\item send\_int(ADDRESS, int)
+\item send\_char(ADDRESS,char)
+\item send\_int\_array(ADDRESS, int[], size)
+\item send\_char\_array(ADDRESS, char[], size)
+\item read\_int(ADDRESS, int)
+\item read\_char(ADDRESS, char)
+\item read\_int\_array(ADDRESS, int[], size)
+\item read\_char\_array(ADDRESS, char[], size)
+\item for
+\item while
+\item return
+\item function
+\end{enumerate}
+\subsection{Data Types}
+The following are data types that exist in the language. These can not be
+overridden or expanded.
+\begin{enumerate}
+\item int
+\item char
+\item float
+\item array $\rightarrow$ char[constant]
+\end{enumerate}
+\subsection{Keywords}
+The following are data types that deal with interacting with the data bus.
+\begin{enumerate}
+\item ADDRESS
+\item WRITE
+\item READ
+\end{enumerate}
+\subsection{Comments}
+Our language has only one way to enter comments and that is in C-style
+(\textit{/* comment */})
+\section{Syntax}
+In this language, we have certain rules on how to have things up and running.
+
+For example, there can only be one statement per line -- with some exceptions.
+Blank lines are ignored. The assembly will put comments at the start of a block,
+so:
+\newline
+\texttt{int x = 0 /* set a variable */}
+will turn into:
+\newline
+\newline
+\texttt{x defb 0 ; set a variable }
+\section{Sample Programs}
+\texttt{ 
+main()
+\newline
+$\{$
+\newline
+  char type[11]
+\newline
+  type = ``hello world"
+\newline
+  send\_char\_array(0xFF00, type, size)
+\newline
+$\}$
+\newline
+}
+\end{document}
