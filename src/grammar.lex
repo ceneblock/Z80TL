@@ -1,6 +1,6 @@
 %{
 #include<stdio.h>
-#include <math.h>
+#include "scanner_rules.h"
 %}
 
 NUMBER [0-9]+
@@ -8,24 +8,18 @@ INTEGER int
 IDENTIFIER [a-zA-Z][a-zA-Z0-9]*
 %%
 {NUMBER}+ { 
-            printf("An integer %s (%d) \n", yytext, atoi(yytext));
+           return NUMBER;
           }
 {INTEGER}+ { 
-            printf("An integer %s (%d) \n", yytext, atoi(yytext));
+            return INTEGER;
           }
 {IDENTIFIER}+ {
-            printf("An identifier %s\n", yytext);
+           return IDENTIFIER;
           }
 
+.           ;
 %%
-main(argc, argv)
-int argc;
-char **argv;
+int yywrap()
 {
-  ++argv, --argc; /* skip over program name */
-  if(argc > 0)
-  {
-    yyin = fopen(argv[0], "r");
-    yylex();
-  }
-  }
+  return 1;
+}
