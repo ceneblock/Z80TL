@@ -37,6 +37,17 @@ overridden or expanded.
 \item float
 \item array $\rightarrow$ char[constant]
 \end{enumerate}
+
+Variables must start with a character (case doesn't matter) and
+\textbf{\underline{can not}} start with an \_.
+
+Identifiers are case insensitive within their scope. So, if you have a variable
+called \textit{var} in main, then it can be referred to \textit{var, Var, VAR,
+  vAr, and so on}.
+
+Each function creates a new scope, leaving you the option to have variables
+called the same thing and have different meaning in functions (\textit{main() can
+    have ``char x" and fun1() can have ``int x"}) 
 \subsection{Keywords}
 The following are data types that deal with interacting with the data bus.
 \begin{enumerate}
@@ -70,6 +81,31 @@ $\{$
   type = ``hello world"
 \newline
   send\_char\_array(0xFF00, type, size)
+\newline
+$\}$
+\newline
+\newline
+function fun(int x)
+\newline
+$\{$
+\newline
+  x = x + 1
+\newline
+  return x
+\newline
+$\}$
+\newline
+main()
+\newline
+$\{$
+\newline
+  int x
+\newline
+  x = 11
+\newline
+  x = fun(x)
+\newline
+  send\_int(0x00FF, x)
 \newline
 $\}$
 \newline

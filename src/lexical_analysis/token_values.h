@@ -1,0 +1,10 @@
+#define NUMBER 1
+#define INTEGER 2
+#define IDENTIFIER 3
+#define RBRACE 4
+#define LBRACE 5
+#define COLON 6
+#define ASSIGNMENT 7
+#define DOUBLEASSIGNMENT 8
+#define BINARYOP 9
+#define NEWLINE 10

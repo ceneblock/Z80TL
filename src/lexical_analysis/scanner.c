@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "scanner_rules.h"
+#include "y.tab.h"
 extern int yylex();
 extern int yylineno;
 extern char* yytext;
