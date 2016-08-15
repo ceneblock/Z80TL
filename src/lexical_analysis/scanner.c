@@ -10,11 +10,14 @@ int main()
 {
   int ntoken, vtoken;
 
+  /*
   ntoken = yylex();
   while(ntoken)
   {
     printf("%i \n", ntoken);
     ntoken = yylex();
   }
+  */
+  yyparse();
   return 0;
 }

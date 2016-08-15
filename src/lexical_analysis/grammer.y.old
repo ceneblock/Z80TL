@@ -1,0 +1,99 @@
+%{
+  void yyerror(char *string);
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <string.h>
+  #include "symboltable.h"
+  /*Z80TL_symboltable *table;*/
+  void add_symbol(int scope, char *string);
+  int lookup_symbol(int scope, char *string);
+  void remove_symbol(int scope, char *string);
+  unsigned int num_tokens = 0;
+  unsigned int scope = 0;
+%}
+%token number
+%token integer
+%token identifier
+%token rbrace
+%token lbrace
+%token colon
+%token binaryop
+%token newline
+
+%left ':'
+%left '=' '>' '<'
+%left '+' '-'
+%left '*' '/'
+%left '(' ')'
+
+%%
+
+line : assignment 
+     | expression {printf("Expression: %s\n", $1);}
+     | line term '\n' {printf("Term: %i\n", $1);}
+     | 
+;
+
+assignment : identifier ':' expression
+;
+/*
+term       : identifier 
+           | number {
+                      printf("YACC: %i\n", $1);
+                      $$ = $1;}
+;
+*/
+term       : number {$$ = $1;}
+
+expression : term '+' expression  {$$ = $1 + $3;}
+           | term '-' expression  {$$ = $1 - $3;}
+           | term '*' expression  {$$ = $1 * $3;}
+           | term '/' expression  {$$ = $1 / $3;}
+           | '(' expression ')' {$$ = $2;}
+           | term {$$ = $1;}
+;
+%%
+
+//int binary_search(char *string)
+//{
+//  ///return values will be -1 for not found
+//  ///and -2 for already defined
+//  int index = -1;
+//  int check = numtokens / 2;
+//  int check_last = 0;
+//  if(numtokens == 0)
+//  {
+//    return -1;
+//  }
+//  else
+//  {
+//    
+//    while(index == -1)
+//    {
+//      int count = 0;
+//      Z80TL_symboltable *temp = symboltable;
+//      while(count != check);
+//      {
+//        temp = temp -> next;
+//      }
+//
+//      if(count 
+//    }
+//  }
+//  return index;
+//}
+
+/**
+  @brief adds a symbol to the table
+  @input string the name of the actual 
+void add_symbol(char *string)
+{
+  Z80TL_symboltable *new = malloc(sizeof(Z80TL_symboltable));
+  new -> identifier = malloc(sizeof(char *strlen(string)));
+  new -> &identifier = string;
+  new -> scope = scope;
+
+}
+int lookup_symbol(char *string);
+void remove_symbol(char *string);
+*/

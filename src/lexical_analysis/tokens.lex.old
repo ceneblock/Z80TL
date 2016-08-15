@@ -1,0 +1,43 @@
+%{
+#include "y.tab.h"
+#include <stdio.h>
+%}
+
+NUMBER [0-9]+
+INTEGER int
+IDENTIFIER [a-zA-Z][a-zA-Z0-9_]*
+RBRACE "{"
+LBRACE "}"
+COLON  ":"
+COMPARISON ["="">"<"]
+BINARYOP   ["+""\-""/""*"]
+NEWLINE    \n
+%%
+{NUMBER}+           { 
+                      yylval = atoi(yytext);
+                      printf("Lex: %i\n", yylval);
+                      return number;
+                    }
+{INTEGER}           return integer;
+{IDENTIFIER}        return identifier;
+{RBRACE}            return rbrace;
+{LBRACE}            return lbrace;
+{COLON}             return colon;
+{COMPARISON}        return yytext[0];
+{BINARYOP}          {
+                      //yylval = atoi(yytext);
+                      printf("Lex: %c\n", yytext[0]);
+                      return yytext[0];
+                    }
+{NEWLINE}           return *yytext;
+.                 ;
+%%
+int yywrap()
+{
+  return 1;
+}
+
+void yyerror(char *string)
+{
+  printf("Error: %s\n", string);
+}
